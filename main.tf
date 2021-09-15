@@ -1,10 +1,11 @@
- terraform {
+ /*terraform {
     backend "s3" {
     bucket = "default-terraform-state-ap-southeast-1-929522000095"
     key = "terraform.tfstate"
     region = "ap-southeast-1"
   } 
  }
+ */
  
 
 locals {
