@@ -189,6 +189,7 @@ output "vpce_s3_cidr_blocks" {
   description = "The list of CIDR blocks for S3 service."
   value       = flatten(aws_vpc_endpoint.s3.*.cidr_blocks)
 }
+
 /*
 output "vpce_dynamodb_id" {
   description = "The ID of VPC endpoint for DynamoDB"
