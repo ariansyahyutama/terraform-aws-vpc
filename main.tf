@@ -1,13 +1,3 @@
- /*terraform {
-    backend "s3" {
-    bucket = "default-terraform-state-ap-southeast-1-929522000095"
-    key = "terraform.tfstate"
-    region = "ap-southeast-1"
-  } 
- }
- */
- 
-
 locals {
   max_byte_length = "8" # max bytes of random id to use as unique suffix. 16 hex chars, each byte takes 2 hex chars
     ## Cloudwatch Log Group for VPC Flow Logs
