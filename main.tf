@@ -66,7 +66,6 @@ resource "aws_subnet" "public" {
   count = length(var.subnet_availability_zones)
 
   availability_zone       = element(var.subnet_availability_zones, count.index)
-  #cidr_block              = cidrsubnet(var.vpc_cidr_block, "4", count.index)
   cidr_block              = cidrsubnet(var.vpc_cidr_block, "3", count.index)
   map_public_ip_on_launch = "true"
   vpc_id                  = aws_vpc.this.id
@@ -481,35 +480,45 @@ module "flowlogs_to_s3_naming" {
 
 data "aws_canonical_user_id" "current_user" {}
 
-resource "aws_s3_bucket" "log_bucket" {
-  bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
-  acl    = "log-delivery-write"
-}
-resource "aws_s3_bucket" "flowlogs_to_s3" {
-  bucket = module.flowlogs_to_s3_naming.name
-  acl    = "private"
+resource "aws_s3_bucket_acl" "this" {
+    bucket = aws_s3_bucket.flowlogs_to_s3.id
+    acl    = "private"
+  }
 
-  server_side_encryption_configuration {
+  resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
+  bucket = aws_s3_bucket.flowlogs_to_s3.id
+
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
+      sse_algorithm     = "AES256"
       }
     }
   }
 
-  lifecycle_rule {
-    id      = "FlowLogsRetention"
-    enabled = "true"
+  resource "aws_s3_bucket_lifecycle_configuration" "this" {
+    bucket = aws_s3_bucket.flowlogs_to_s3.id
 
-    expiration {
-      days = var.flowlogs_bucket_retention_in_days
+    rule {
+      id     = "FlowLogsRetention"
+      status = "Enabled"
+
+      expiration {
+        days = var.flowlogs_bucket_retention_in_days
+      }
     }
   }
 
-  logging {
-    target_bucket = aws_s3_bucket.log_bucket.id #var.flowlogs_s3_logging_bucket_name
+resource "aws_s3_bucket_logging" "this" {
+    bucket = aws_s3_bucket.flowlogs_to_s3.id
+
+    target_bucket = var.flowlogs_s3_logging_bucket_name
     target_prefix = "${module.flowlogs_to_s3_naming.name}/"
-  }
+}
+
+resource "aws_s3_bucket" "flowlogs_to_s3" {
+  bucket = module.flowlogs_to_s3_naming.name
+  #acl    = "private"
+  #hapus ini jika error 
 
   tags = merge(
     var.additional_tags,
@@ -523,7 +532,7 @@ resource "aws_s3_bucket" "flowlogs_to_s3" {
       "ManagedBy" = "terraform"
     },
   )
-  depends_on = [aws_s3_bucket.log_bucket]
+  depends_on = [aws_s3_bucket.flowlogs_to_s3]
 }
 
 resource "aws_s3_bucket_policy" "flowlogs_to_s3" {
@@ -573,6 +582,7 @@ resource "aws_vpc_endpoint_route_table_association" "s3_public" {
   route_table_id  = aws_route_table.public.id
 }
 
+/*
 # Provides resources that each create an association between S3 VPC endpoint and an app routing table.
 # One for each AZ.
 # Only created when the VPC is multi-tier.
@@ -600,7 +610,7 @@ resource "aws_vpc_endpoint_route_table_association" "s3_data" {
     ignore_changes = [id]
   }
 }
-
+*/
 
 # Provides an RDS DB subnet group resource.
 # Only created when the VPC is multi-tier.
