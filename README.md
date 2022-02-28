@@ -91,16 +91,15 @@ Just re-execute `terraform apply` and you will be fine.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.0 |
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.74 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | >= 1.2, < 3.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=  v1.1.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.2.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.1.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.74 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.2.0 |
 
 ## Modules
 
