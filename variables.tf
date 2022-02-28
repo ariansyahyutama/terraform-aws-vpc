@@ -78,14 +78,14 @@ variable "flowlogs_bucket_retention_in_days" {
   description = "FlowLogs bucket retention (in days)"
   default     = 14
 }
-/*
+
 variable "flowlogs_s3_logging_bucket_name" {
   description = "S3 bucket name to store FlowLogs S3 Bucket log"
   type        = string
-}*/
-
+}
+/*
 variable "target_log_bucket_s3_name" {
     type = string
     description = "s3 bucket name to store flowlogs s3 bucketlog"
   
-}
+}*/
