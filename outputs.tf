@@ -216,3 +216,20 @@ output "vpce_dynamodb_cidr_blocks" {
 */
 # In case you are wondering why there are so many ugly interpolation: 
 # https://github.com/hashicorp/terraform/issues/16726
+
+
+
+output "subnet_availability_zones" {
+  value = data.aws_availability_zones.available.names[*]
+}
+
+
+/*variable "subnet_availability_zones" {
+  description = "List of AZs to spread VPC subnets over."
+  type        = list(string)
+
+  default = [
+    "ap-southeast-1a",
+    "ap-southeast-1b",
+  ]
+}*/

@@ -35,6 +35,10 @@ data "aws_caller_identity" "current" {
 data "aws_region" "current" {
 }
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_vpc" "this" {
   cidr_block = var.vpc_cidr_block
 
