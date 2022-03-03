@@ -195,6 +195,11 @@ output "vpce_s3_cidr_blocks" {
   value       = flatten(aws_vpc_endpoint.s3.*.cidr_blocks)
 }
 
+output "aws_vpn_gateway_id" {
+  description = "vpn gateway id"
+  value       = aws_vpn_gateway.this[0].id
+}
+
 /*
 output "vpce_dynamodb_id" {
   description = "The ID of VPC endpoint for DynamoDB"
@@ -219,9 +224,7 @@ output "vpce_dynamodb_cidr_blocks" {
 
 
 
-output "subnet_availability_zones" {
-  value = data.aws_availability_zones.available.names[*]
-}
+
 
 
 /*variable "subnet_availability_zones" {
