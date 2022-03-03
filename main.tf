@@ -638,7 +638,7 @@ resource "aws_db_subnet_group" "this" {
     },
   )
 }
-
+/*
 resource "aws_vpn_gateway" "this" {
   count = var.enable_vpn_gateway ? 1 : 0
 
@@ -651,3 +651,4 @@ resource "aws_vpn_gateway" "this" {
     },
   )
 }
+*/
