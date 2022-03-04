@@ -197,7 +197,7 @@ output "vpce_s3_cidr_blocks" {
 
 output "aws_vpn_gateway_id" {
   description = "vpn gateway id"
-  value       = aws_vpn_gateway.this[0].id
+  value       = aws_vpn_gateway.this.id
 }
 
 /*
