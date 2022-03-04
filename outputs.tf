@@ -159,11 +159,11 @@ output "nat_private_ips" {
   description = "List of private IP addresses of the NAT Gateway."
   value       = [aws_nat_gateway.this.*.private_ip]
 }
-
-output "rtb_public_id" {
+/*
+output "rtb_public_ids" {
   description = "ID of public route table"
   value       = element(concat(aws_route_table.public.*.id, [""]), "0")
-}
+}*/
 
 output "rtb_app_ids" {
   description = "List of IDs of app route tables"
