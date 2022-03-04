@@ -194,13 +194,13 @@ output "vpce_s3_cidr_blocks" {
   description = "The list of CIDR blocks for S3 service."
   value       = flatten(aws_vpc_endpoint.s3.*.cidr_blocks)
 }
-/*
+
 output "aws_vpn_gateway_id" {
   description = "vpn gateway id"
   value       = aws_vpn_gateway.this[0].id
 }
 
-
+/*
 output "vpce_dynamodb_id" {
   description = "The ID of VPC endpoint for DynamoDB"
   value       = element(concat(aws_vpc_endpoint.dynamodb.*.id, [""]), "0")
