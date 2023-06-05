@@ -522,9 +522,9 @@ resource "aws_s3_bucket_logging" "this" {
 }
 
 */
-resource "aws_s3_bucket" "log_bucket" {
-  bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
-}
+#resource "aws_s3_bucket" "log_bucket" {
+#  bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
+#}
 
 resource "aws_s3_bucket" "log_bucket" {
   bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
