@@ -519,6 +519,10 @@ resource "aws_s3_bucket_acl" "this" {
 #    target_bucket = var.flowlogs_s3_logging_bucket_name
 #    target_prefix = "${module.flowlogs_to_s3_naming.name}/"
 #}
+resource "aws_s3_bucket" "log_bucket" {
+  bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
+}
+
 
 resource "aws_s3_bucket" "flowlogs_to_s3" {
   bucket = module.flowlogs_to_s3_naming.name
