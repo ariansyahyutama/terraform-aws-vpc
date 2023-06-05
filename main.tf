@@ -485,6 +485,7 @@ module "flowlogs_to_s3_naming" {
 
 data "aws_canonical_user_id" "current_user" {}
 
+/*
 resource "aws_s3_bucket_acl" "this" {
     bucket = aws_s3_bucket.flowlogs_to_s3.id
     acl    = "private"
@@ -522,7 +523,37 @@ resource "aws_s3_bucket_logging" "this" {
 resource "aws_s3_bucket" "log_bucket" {
   bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
 }
+*/
 
+resource "aws_s3_bucket" "log_bucket" {
+  bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
+  acl    = "log-delivery-write"
+}
+resource "aws_s3_bucket" "flowlogs_to_s3" {
+  bucket = module.flowlogs_to_s3_naming.name
+  acl    = "private"
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+
+  lifecycle_rule {
+    id      = "FlowLogsRetention"
+    enabled = "true"
+
+    expiration {
+      days = var.flowlogs_bucket_retention_in_days
+    }
+  }
+
+  logging {
+    target_bucket = aws_s3_bucket.log_bucket.id #var.flowlogs_s3_logging_bucket_name
+    target_prefix = "${module.flowlogs_to_s3_naming.name}/"
+  }
 
 resource "aws_s3_bucket" "flowlogs_to_s3" {
   bucket = module.flowlogs_to_s3_naming.name
