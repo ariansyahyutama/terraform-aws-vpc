@@ -520,10 +520,11 @@ resource "aws_s3_bucket_logging" "this" {
     target_bucket = var.flowlogs_s3_logging_bucket_name
     target_prefix = "${module.flowlogs_to_s3_naming.name}/"
 }
+
+*/
 resource "aws_s3_bucket" "log_bucket" {
   bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
 }
-*/
 
 resource "aws_s3_bucket" "log_bucket" {
   bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
@@ -555,7 +556,22 @@ resource "aws_s3_bucket" "flowlogs_to_s3" {
     target_prefix = "${module.flowlogs_to_s3_naming.name}/"
   }
 
-resource "aws_s3_bucket" "flowlogs_to_s3" {
+    tags = merge(
+    var.additional_tags,
+    {
+      "ProductDomain" = var.product_domain
+    },
+    {
+      "Environment" = var.environment
+    },
+    {
+      "ManagedBy" = "terraform"
+    },
+  )
+  depends_on = [aws_s3_bucket.log_bucket]
+}
+
+/*resource "aws_s3_bucket" "flowlogs_to_s3" {
   bucket = module.flowlogs_to_s3_naming.name
   #acl    = "private"
   #hapus ini jika error 
@@ -573,7 +589,7 @@ resource "aws_s3_bucket" "flowlogs_to_s3" {
     },
   )
   depends_on = [aws_s3_bucket.flowlogs_to_s3]
-}
+}*/
 
 resource "aws_s3_bucket_policy" "flowlogs_to_s3" {
   bucket = aws_s3_bucket.flowlogs_to_s3.id
