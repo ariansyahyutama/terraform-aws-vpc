@@ -472,8 +472,8 @@ resource "aws_default_security_group" "this" {
 }
 
 module "flowlogs_to_s3_naming" {
-  # source = "git@github.com:ariansyahyutama/terraform-aws-resource-naming.git" # ?ref=v0.19.1 git@github.com:traveloka/terraform-aws-resource-naming.git
-  source = "git@github.com:traveloka/terraform-aws-resource-naming.git?ref=v0.24.1"
+  source = "git@github.com:ariansyahyutama/terraform-aws-resource-naming.git" # ?ref=v0.19.1
+  #source = "git@github.com:traveloka/terraform-aws-resource-naming.git?ref=v0.24.1"
   name_prefix = format(
     "%s-flowlogs-%s",
     aws_vpc.this.id,
