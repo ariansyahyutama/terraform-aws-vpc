@@ -591,7 +591,7 @@ resource "aws_vpc_endpoint_route_table_association" "s3_public" {
   route_table_id  = aws_route_table.public.id
 }
 
-/*
+
 # Provides resources that each create an association between S3 VPC endpoint and an app routing table.
 # One for each AZ.
 # Only created when the VPC is multi-tier.
@@ -619,7 +619,7 @@ resource "aws_vpc_endpoint_route_table_association" "s3_data" {
     ignore_changes = [id]
   }
 }
-*/
+
 
 # Provides an RDS DB subnet group resource.
 # Only created when the VPC is multi-tier.
