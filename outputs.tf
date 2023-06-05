@@ -236,3 +236,9 @@ output "vpce_dynamodb_cidr_blocks" {
     "ap-southeast-1b",
   ]
 }*/
+
+
+output "rtb_public_ids" {
+  description = "List of IDs of data route tables"
+  value       = [aws_route_table.public.*.id]
+}
