@@ -513,12 +513,12 @@ resource "aws_s3_bucket_acl" "this" {
     }
   }
 
-#resource "aws_s3_bucket_logging" "this" {
-#    bucket = aws_s3_bucket.flowlogs_to_s3.id
+resource "aws_s3_bucket_logging" "this" {
+    bucket = aws_s3_bucket.flowlogs_to_s3.id
 
-#    target_bucket = var.flowlogs_s3_logging_bucket_name
-#    target_prefix = "${module.flowlogs_to_s3_naming.name}/"
-#}
+    target_bucket = var.flowlogs_s3_logging_bucket_name
+    target_prefix = "${module.flowlogs_to_s3_naming.name}/"
+}
 resource "aws_s3_bucket" "log_bucket" {
   bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
 }
