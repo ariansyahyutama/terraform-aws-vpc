@@ -48,10 +48,10 @@ output "vpc_enable_dns_hostnames" {
   value       = element(concat(aws_vpc.this.*.enable_dns_hostnames, [""]), "0")
 }
 
-output "vpc_enable_classiclink" {
-  description = "Whether or not the VPC has Classiclink enabled."
-  value       = element(concat(aws_vpc.this.*.enable_classiclink, [""]), "0")
-}
+#output "vpc_enable_classiclink" {
+#  description = "Whether or not the VPC has Classiclink enabled."
+#  value       = element(concat(aws_vpc.this.*.enable_classiclink, [""]), "0")
+#}
 
 output "vpc_multi_tier" {
   description = "Whether or not the VPC has Multi Tier subnets."
