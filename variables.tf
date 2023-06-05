@@ -89,21 +89,3 @@ variable "target_log_bucket_s3_name" {
     description = "s3 bucket name to store flowlogs s3 bucketlog"
   
 }*/
-
-variable "vpn_gateway_name" {
-  description = "vpn gateway name for tagging"
-  type = string
-  default = "default-vpn-gateway"
-}
-
-variable "enable_vpn_gateway" {
-  description = "Should be true if you want to create a new VPN Gateway resource and attach it to the VPC"
-  type        = bool
-  default     = false
-}
-
-variable "vpn_gateway_id" {
-  description = "ID of VPN Gateway to attach to the VPC"
-  type        = string
-  default     = ""
-}

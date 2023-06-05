@@ -640,14 +640,3 @@ resource "aws_db_subnet_group" "this" {
   )
 }
 
-resource "aws_vpn_gateway" "this" {
-  #count = var.enable_vpn_gateway ? 1 : 0
-  vpc_id              = aws_vpc.this.id
-  
-  tags = merge(
-    local.common_tags,
-    {
-      "Name" =  var.vpn_gateway_name 
-    },
-  )
-}
