@@ -175,10 +175,10 @@ output "rtb_data_ids" {
   value       = [aws_route_table.data.*.id]
 }
 
-output "rtb_public_ids" {
-  description = "List of IDs of data route tables"
-  value       = [aws_route_table.public.*.id]
-}
+#output "rtb_public_ids" {
+#  description = "List of IDs of data route tables"
+#  value       = [aws_route_table.public.*.id]
+#}
 
 output "vpce_s3_id" {
   description = "The ID of VPC endpoint for S3"
