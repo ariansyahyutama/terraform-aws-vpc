@@ -523,7 +523,7 @@ resource "aws_s3_bucket_logging" "this" {
 
 resource "aws_s3_bucket" "log_bucket" {
   bucket = var.target_log_bucket_s3_name #"log-bucket-inf"
-  acl    = "log-delivery-write"
+  acl    = "private"
 }
 resource "aws_s3_bucket" "flowlogs_to_s3" {
   bucket = module.flowlogs_to_s3_naming.name
